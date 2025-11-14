@@ -55,28 +55,17 @@ Os pacotes instalam:
 
 ---
 
-## 4. Carregar módulos Hyper-V
+## 4. Limpar Módulo Hyper-V
 
-```bash
-sudo modprobe hv_utils
-```
-
-Verifique se o VMBus está ativo:
-
-```bash
-ls -l /dev/vmbus/
-```
-
-Para recarregar o módulo (se necessário):
+Limpe o módulo Hyper-V
 
 ```bash
 sudo modprobe -r hv_utils
-sudo modprobe hv_utils
 ```
 
 ---
 
-## 5. Reiniciar os serviços e habilitar as daemons
+## 5. Reiniciar os serviços e habilitar módulo e daemons
 
 ```bash
 sudo modprobe hv_utils
