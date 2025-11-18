@@ -1,4 +1,4 @@
-# Configuração dos Daemons Hyper-V no Ubuntu
+# Configuração dos Daemons Hyper-V no Ubuntu 22
 
 ### (KVP, VSS e FCopy totalmente funcionais + Correção dos erros de DNS/DHCP)
 
