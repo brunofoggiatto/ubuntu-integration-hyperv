@@ -68,13 +68,7 @@ sudo modprobe -r hv_utils
 ## 5. Reiniciar os serviços e habilitar módulo e daemons
 
 ```bash
-sudo modprobe hv_utils
-sudo systemctl restart hv-kvp-daemon.service
-sudo systemctl restart hv-fcopy-daemon.service
-sudo systemctl restart hv-vss-daemon.service
-sudo systemctl enable hv-kvp-daemon.service
-sudo systemctl enable hv-fcopy-daemon.service
-sudo systemctl enable hv-vss-daemon.service
+sudo modprobe hv_utils && sudo systemctl restart hv-kvp-daemon.service && sudo systemctl restart hv-fcopy-daemon.service && sudo systemctl restart hv-vss-daemon.service && sudo systemctl enable hv-kvp-daemon.service && sudo systemctl enable hv-fcopy-daemon.service && sudo systemctl enable hv-vss-daemon.service
 ```
 
 ---
