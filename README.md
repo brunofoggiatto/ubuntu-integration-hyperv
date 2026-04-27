@@ -42,16 +42,27 @@ sudo apt upgrade -y
 sudo apt install linux-tools-$(uname -r) linux-cloud-tools-$(uname -r) -y
 ```
 
-### Instalar as versões genéricas (recomendado):
+### Instalar as versões genéricas:
 
 ```bash
 sudo apt install linux-tools-generic linux-cloud-tools-generic -y
+```
+
+### Instala ambos:
+
+```bash
+KVER=$(uname -r) && sudo apt install -y linux-tools-$KVER linux-cloud-tools-$KVER linux-tools-generic linux-cloud-tools-generic
 ```
 
 Os pacotes instalam:
 - `hv_kvp_daemon`
 - `hv_fcopy_daemon` (Não é necessário se seu objetivo for integração Hyper-V)
 - `hv_vss_daemon`
+
+Validar:
+```bash
+ls /usr/lib/linux-tools/$(uname -r)/hv_*
+```
 
 ---
 
@@ -71,6 +82,18 @@ sudo modprobe -r hv_utils
 sudo modprobe hv_utils && sudo systemctl restart hv-kvp-daemon.service && sudo systemctl restart hv-fcopy-daemon.service && sudo systemctl restart hv-vss-daemon.service && sudo systemctl enable hv-kvp-daemon.service && sudo systemctl enable hv-fcopy-daemon.service && sudo systemctl enable hv-vss-daemon.service
 ```
 
+## OU
+
+## Parar daemons e descarregar o módulo Hyper-V
+```bash
+sudo systemctl stop hv-kvp-daemon.service hv-fcopy-daemon.service hv-vss-daemon.service 2>/dev/null; sudo modprobe -r hv_utils
+```
+
+## Recarregar módulo e subir daemons habilitando no boot
+```bash
+sudo modprobe hv_utils && sudo systemctl daemon-reload && sudo systemctl enable --now hv-kvp-daemon.service hv-fcopy-daemon.service hv-vss-daemon.service
+```
+
 ---
 
 ## 6. Verificar se tudo foi instalado corretamente
@@ -88,6 +111,13 @@ systemctl list-units --all | grep hv-
 ```
 
 ---
+
+## Caso baixou as duas opções de kernel para não rebootar a máquina:
+## Confirmar que o metapacote vai acompanhar atualizações futuras
+```bash
+apt-cache depends linux-tools-generic | grep Depends && apt-cache depends linux-cloud-tools-generic | grep Depends
+```
+
 
 ## Resolução de Problemas
 
